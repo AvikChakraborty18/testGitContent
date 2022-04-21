@@ -1,4 +1,4 @@
-# Setup SAP Business Technology Platform
+# Setup SAP BTP
 
 You will now prepare your SAP Business Technology Platform environment with the help of boosters, configure your entitlements and configure your account for our extension scenario.
 
