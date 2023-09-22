@@ -2,7 +2,7 @@
 
 <!-- disco-toc-start -->
 - World cup Group 1
-  - [Germany](../worldcup/Germany)
+  - [Germany](../worldcup/Germany)<!-- dc-card: {"boosterId":"cos"} dc-card -->
   - [United States Of America](../worldcup/Usa)<!-- dc-card: {"label":  ["xyz","abc"],"cardName":"USA","boosterId":"cos"} dc-card -->
   - [Portugal](../worldcup/Portugal)
   - [Ghana](../worldcup/Ghana)
