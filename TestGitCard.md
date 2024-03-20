@@ -61,6 +61,9 @@ Create a subaccount in the SAP BTP, Cloud Foundry environment.
 </tr>
 </table>
 
+------------------------
+
 | Tests    | Run Date | Status |
 | -------- | ------- | ----- |
+| **1. Create a subaccount in your global account.** <br> Select a region according to the guidelines in the [SAP Business Application Studio Availability](sap-business-application-studio-availability-8509485.md) topic. |  Create a subaccount in the SAP BTP, Cloud Foundry environment.   | [Create a Subaccount](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/05280a123d3044ae97457a25b3013918.html) |
 | **1. Create a subaccount in your global account.** <br> Select a region according to the guidelines in the [SAP Business Application Studio Availability](sap-business-application-studio-availability-8509485.md) topic. |  Create a subaccount in the SAP BTP, Cloud Foundry environment.   | [Create a Subaccount](https://help.sap.com/viewer/65de2977205c403bbc107264b8eccf4b/Cloud/en-US/05280a123d3044ae97457a25b3013918.html) |
