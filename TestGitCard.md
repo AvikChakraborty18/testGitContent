@@ -43,7 +43,7 @@ Additional Information
 <tr>
 <td valign="top">
 
-#### 1. Create a subaccount in your global account.
+1. Create a subaccount in your global account.
 
 Select a region according to the guidelines in the [SAP Business Application Studio Availability](sap-business-application-studio-availability-8509485.md) topic.
 
