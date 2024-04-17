@@ -1,3 +1,4 @@
+
 # Create a SAPUI5/SAP Fiori Freestyle app
 
 This tutorial uses the basic template to create a SAPUI5 app. The basic template is intended for all developers who want to start developing their own SAPUI5 app from scratch. 
@@ -199,11 +200,11 @@ Fiori Elements provide less flexibility but speed up development by reducing the
 
     We continue with classic Text Editor.
 
-    Extend your app with a Text field and a Button and a FlexBox to align the items. Note, the button has the event `press=".onPress"`. You will use it later...
+    Extend your app with a Text field and a Button and a FlexBox to align the items. Note, the button has the event `press=".onPress"`. You will use it later.
 
     ![](images/3_2_4_addbutton.png)
 
-    ```xml
+    ```xml 
     <mvc:View controllerName="sap.btp.helloworldui5.controller.View1"
         xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
         xmlns="sap.m">
@@ -233,11 +234,11 @@ Fiori Elements provide less flexibility but speed up development by reducing the
 
    ![](images/3_2_5_addeventhandler.png)
 
-   ```yaml
-       sap.ui.define([
-           "sap/ui/core/mvc/Controller",
-           "sap/m/MessageBox"
-       ],
+    ```Javascript 
+    sap.ui.define([
+        "sap/ui/core/mvc/Controller",
+        "sap/m/MessageBox"
+    ],
         /** @param {typeof sap.ui.core.mvc.Controller} Controller */
         function (Controller, MessageBox) {
             "use strict";
@@ -250,10 +251,11 @@ Fiori Elements provide less flexibility but speed up development by reducing the
                 }
             });
         });
-   ```
+    ```
 
 5. Preview your application and click the button.
 
     ![](images/3_2_6_preview.png)
 
 Feel free to continue your work using [SAPUI5 Demo Kit](https://ui5.sap.com/#/).
+ 
