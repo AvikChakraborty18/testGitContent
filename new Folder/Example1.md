@@ -233,11 +233,11 @@ Fiori Elements provide less flexibility but speed up development by reducing the
 
    ![](images/3_2_5_addeventhandler.png)
 
-   ```js 
-    sap.ui.define([
-        "sap/ui/core/mvc/Controller",
-        "sap/m/MessageBox"
-    ],
+   ```yaml
+       sap.ui.define([
+           "sap/ui/core/mvc/Controller",
+           "sap/m/MessageBox"
+       ],
         /** @param {typeof sap.ui.core.mvc.Controller} Controller */
         function (Controller, MessageBox) {
             "use strict";
