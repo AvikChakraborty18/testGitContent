@@ -204,7 +204,7 @@ Fiori Elements provide less flexibility but speed up development by reducing the
 
     ![](images/3_2_4_addbutton.png)
 
-    ```xml 
+    ```yaml 
     <mvc:View controllerName="sap.btp.helloworldui5.controller.View1"
         xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
         xmlns="sap.m">
