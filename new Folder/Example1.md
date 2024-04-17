@@ -199,7 +199,7 @@ Fiori Elements provide less flexibility but speed up development by reducing the
 
     We continue with classic Text Editor.
 
-    Extend your app with a Text field and a Button and a FlexBox to align the items. Note, the button has the event `press=".onPress"`. You will use it later.
+    Extend your app with a Text field and a Button and a FlexBox to align the items. Note, the button has the event `press=".onPress"`. You will use it later...
 
     ![](images/3_2_4_addbutton.png)
 
