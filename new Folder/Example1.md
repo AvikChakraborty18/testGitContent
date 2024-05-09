@@ -278,3 +278,30 @@ Feel free to continue your work using [SAPUI5 Demo Kit](https://ui5.sap.com/#/).
      }
  }
  ```
+    ```json[14-23]    
+    {
+      "name": "incident-management",
+      "version": "1.0.0",
+      "description": "A simple CAP project.",
+      "repository": "<Add your repository here>",
+      "license": "UNLICENSED",
+      "private": true,
+      "dependencies": {
+        ...
+      },
+      "scripts": {
+        ...
+      },  
+      "cds": {
+        "requires": {
+          "[development]": {
+            "auth": {
+              "kind": "mocked",
+              "users": {}
+            }
+          }
+        }
+      },
+      ...
+    }
+    ```
