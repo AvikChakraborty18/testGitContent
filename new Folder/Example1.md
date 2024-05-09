@@ -260,7 +260,7 @@ Fiori Elements provide less flexibility but speed up development by reducing the
 Feel free to continue your work using [SAPUI5 Demo Kit](https://ui5.sap.com/#/).
 
  
- ```json[5, 11-15]
+ ```json[5,11-15]
  {
      "name": "incident-management",
      "dependencies": {
