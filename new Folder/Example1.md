@@ -258,4 +258,23 @@ Fiori Elements provide less flexibility but speed up development by reducing the
     ![](images/3_2_6_preview.png)
 
 Feel free to continue your work using [SAPUI5 Demo Kit](https://ui5.sap.com/#/).
+
  
+ ```json[5, 11-15]
+ {
+     "name": "incident-management",
+     "dependencies": {
+         ...
+         "@sap/cds-hana": "^x"
+     },
+     ...
+     "cds": {
+         "requires": {
+             ...
+             "[production]": {
+                 "db": "hana"
+             }
+         }
+     }
+ }
+ ```
