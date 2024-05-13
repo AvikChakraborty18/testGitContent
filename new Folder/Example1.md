@@ -103,7 +103,7 @@
       ```
 
   * Add the custom handler implementation after the init method
-        ```javascript
+      ```js
         async onCustomerRead(req) {
           console.log('>> delegating to S4 service...', req.query);
           const top = parseInt(req._queryOptions?.$top) || 100;
@@ -133,51 +133,51 @@
           console.log("after result", result);
           return result;
         }   
-        ```
+    ```
 
 *  Add a custom handler for CREATE, UPDATE, DELETE of incidents. Add this code snippet to the *init* method
 
-    ```javascript
+    ```js
     this.on(['CREATE','UPDATE'], 'Incidents', (req, next) => this.onCustomerCache(req, next));
     this.S4bupa = await cds.connect.to('API_BUSINESS_PARTNER');
     this.remoteService = await cds.connect.to('RemoteService');
     ```
 * Add the custom handler after the *init* method
 
-    ```javascript
+  ```js
     async onCustomerCache(req, next) {
-          const { Customers } = this.entities;
-          const newCustomerId = req.data.customer_ID;
-          const result = await next();
-          const { BusinessPartner } = this.remoteService.entities;
-          if (newCustomerId && (newCustomerId !== "") && ((req.event == "CREATE") || (req.event == "UPDATE"))) {
-              console.log('>> CREATE or UPDATE customer!');
-      
-              // Expands are required as the runtime does not support path expressions for remote services
-              const customer = await this.S4bupa.run(SELECT.one(BusinessPartner, bp => {
-                  bp('*'),
-                      bp.addresses(address => {
-                          address('email', 'phoneNumber'),
-                              address.email(emails => {
-                                  emails('email')
-                              }),
-                              address.phoneNumber(phoneNumber => {
-                                  phoneNumber('phone')
-                              })
-                      })
-              }).where({ ID: newCustomerId }));
-      
-              if (customer) {
-                  customer.email = customer.addresses[0]?.email[0]?.email;
-                  customer.phone = customer.addresses[0]?.phoneNumber[0]?.phone;
-                  delete customer.addresses;
-                  delete customer.name;
-                  await UPSERT.into(Customers).entries(customer);
-              }
-          }
-          return result;
+      const { Customers } = this.entities;
+      const newCustomerId = req.data.customer_ID;
+      const result = await next();
+      const { BusinessPartner } = this.remoteService.entities;
+      if (newCustomerId && (newCustomerId !== "") && ((req.event == "CREATE") || (req.event == "UPDATE"))) {
+        console.log('>> CREATE or UPDATE customer!');
+
+        // Expands are required as the runtime does not support path expressions for remote services
+        const customer = await this.S4bupa.run(SELECT.one(BusinessPartner, bp => {
+          bp('*'),
+            bp.addresses(address => {
+              address('email', 'phoneNumber'),
+                address.email(emails => {
+                  emails('email')
+                }),
+                address.phoneNumber(phoneNumber => {
+                  phoneNumber('phone')
+                })
+            })
+        }).where({ ID: newCustomerId }));
+                                                                                      
+        if(customer) {
+          customer.email = customer.addresses[0]?.email[0]?.email;
+          customer.phone = customer.addresses[0]?.phoneNumber[0]?.phone;
+          delete customer.addresses;
+          delete customer.name;
+          await UPSERT.into(Customers).entries(customer);
+        }
       }
-      ```
+      return result;
+      }
+    ```
 
 11. To run tests, navigate to `tests/test.js` and replace line no.3 with the code snippet below
 
