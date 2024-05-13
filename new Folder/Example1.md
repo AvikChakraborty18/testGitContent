@@ -146,36 +146,36 @@
 
     ```javascript
     async onCustomerCache(req, next) {
-      const { Customers } = this.entities;
-      const newCustomerId = req.data.customer_ID;
-      const result = await next();
-      const { BusinessPartner } = this.remoteService.entities;
-      if (newCustomerId && (newCustomerId !== "") && ((req.event == "CREATE") || (req.event == "UPDATE"))) {
-        console.log('>> CREATE or UPDATE customer!');
-
-        // Expands are required as the runtime does not support path expressions for remote services
-        const customer = await this.S4bupa.run(SELECT.one(BusinessPartner, bp => {
-          bp('*'),
-            bp.addresses(address => {
-              address('email', 'phoneNumber'),
-                address.email(emails => {
-                  emails('email')
-                }),
-                address.phoneNumber(phoneNumber => {
-                  phoneNumber('phone')
-                })
-            })
-        }).where({ ID: newCustomerId }));
-                                                                                      
-        if(customer) {
-          customer.email = customer.addresses[0]?.email[0]?.email;
-          customer.phone = customer.addresses[0]?.phoneNumber[0]?.phone;
-          delete customer.addresses;
-          delete customer.name;
-          await UPSERT.into(Customers).entries(customer);
-        }
-      }
-      return result;
+          const { Customers } = this.entities;
+          const newCustomerId = req.data.customer_ID;
+          const result = await next();
+          const { BusinessPartner } = this.remoteService.entities;
+          if (newCustomerId && (newCustomerId !== "") && ((req.event == "CREATE") || (req.event == "UPDATE"))) {
+              console.log('>> CREATE or UPDATE customer!');
+      
+              // Expands are required as the runtime does not support path expressions for remote services
+              const customer = await this.S4bupa.run(SELECT.one(BusinessPartner, bp => {
+                  bp('*'),
+                      bp.addresses(address => {
+                          address('email', 'phoneNumber'),
+                              address.email(emails => {
+                                  emails('email')
+                              }),
+                              address.phoneNumber(phoneNumber => {
+                                  phoneNumber('phone')
+                              })
+                      })
+              }).where({ ID: newCustomerId }));
+      
+              if (customer) {
+                  customer.email = customer.addresses[0]?.email[0]?.email;
+                  customer.phone = customer.addresses[0]?.phoneNumber[0]?.phone;
+                  delete customer.addresses;
+                  delete customer.name;
+                  await UPSERT.into(Customers).entries(customer);
+              }
+          }
+          return result;
       }
       ```
 
