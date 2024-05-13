@@ -132,7 +132,7 @@
           result.$count = 1000;
           console.log("after result", result);
           return result;
-        }   
+    }   
     ```
 
 *  Add a custom handler for CREATE, UPDATE, DELETE of incidents. Add this code snippet to the *init* method
