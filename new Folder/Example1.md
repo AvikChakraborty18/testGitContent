@@ -103,7 +103,7 @@
       ```
 
   * Add the custom handler implementation after the init method
-      ```javascript
+        ```javascript
         async onCustomerRead(req) {
           console.log('>> delegating to S4 service...', req.query);
           const top = parseInt(req._queryOptions?.$top) || 100;
@@ -133,7 +133,7 @@
           console.log("after result", result);
           return result;
         }   
-    ```
+        ```
 
 *  Add a custom handler for CREATE, UPDATE, DELETE of incidents. Add this code snippet to the *init* method
 
@@ -144,7 +144,7 @@
     ```
 * Add the custom handler after the *init* method
 
-  ```javascript
+    ```javascript
     async onCustomerCache(req, next) {
       const { Customers } = this.entities;
       const newCustomerId = req.data.customer_ID;
@@ -177,7 +177,7 @@
       }
       return result;
       }
-    ```
+      ```
 
 11. To run tests, navigate to `tests/test.js` and replace line no.3 with the code snippet below
 
