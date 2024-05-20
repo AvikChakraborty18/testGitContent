@@ -113,7 +113,7 @@ You have configured the access to your application. See [Add Authorization](add-
           expect(status).to.equal(201)
         })
 
-        it(`Should Close the Incident-${draftId}`, async () => {
+        it('Should Close the Incident-${draftId}', async () => {
           const { status } = await PATCH(`/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=false)`, {
             status_code: 'C'
           })
