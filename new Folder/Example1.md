@@ -103,7 +103,7 @@ You have configured the access to your application. See [Add Authorization](add-
       })
 
       describe('Close Incident and Open it again to check Custom logic', () => {
-        it(`Should Close the Incident-${draftId}`, async () => {
+        it('Should Close the Incident-${draftId}', async () => {
           const { status } = await POST(
             `/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=true)/ProcessorService.draftEdit`,
             {
