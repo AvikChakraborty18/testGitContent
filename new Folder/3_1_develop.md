@@ -217,11 +217,10 @@ If you develop a business apps you may prefer using [Fiori Elements](https://exp
     </mvc:View>
 ```
 
-    For more information about the items, see:
-
-    - [Flexbox](https://ui5.sap.com/#/entity/sap.m.FlexBox/sample/sap.m.sample.FlexBoxBasicAlignment)
-    - [Text](https://ui5.sap.com/#/entity/sap.m.Text)
-    - [Button](https://ui5.sap.com/#/entity/sap.ui.webc.main.Button/sample/sap.ui.webc.main.sample.Button)
+For more information about the items, see:
+   - [Flexbox](https://ui5.sap.com/#/entity/sap.m.FlexBox/sample/sap.m.sample.FlexBoxBasicAlignment)
+   - [Text](https://ui5.sap.com/#/entity/sap.m.Text)
+   - [Button](https://ui5.sap.com/#/entity/sap.ui.webc.main.Button/sample/sap.ui.webc.main.sample.Button)
 
 5. Optional: Preview your application.
 
