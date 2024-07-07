@@ -40,7 +40,7 @@ You have added the basic test cases in your application. See [Add Test Cases](ad
     >
     > The **cds add hana** command adds to the **package.json** file the highlighted lines:
 
-    ```json[5, 11-15]
+    ```json
     {
         "name": "incident-management",
         "dependencies": {
