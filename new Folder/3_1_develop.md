@@ -202,7 +202,7 @@ If you develop a business apps you may prefer using [Fiori Elements](https://exp
 
     ![](images/3_2_4_addbutton.png)
 
-   ```XML
+    ```XML
        <mvc:View controllerName="sap.btp.helloworldui5.controller.View1"
            xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
            xmlns="sap.m">
@@ -215,7 +215,7 @@ If you develop a business apps you may prefer using [Fiori Elements](https://exp
                </content>
            </Page>
        </mvc:View>
-   ```
+    ```
 
    For more information about the items, see:
       - [Flexbox](https://ui5.sap.com/#/entity/sap.m.FlexBox/sample/sap.m.sample.FlexBoxBasicAlignment)
