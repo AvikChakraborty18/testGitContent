@@ -43,7 +43,7 @@ You have configured the access to your application. See [Add Authorization](add-
 
 3. Add the following code to the **test.js** file:
 
-    ```javascript
+```javascript
     const cds = require('@sap/cds/lib')
     const { default: axios } = require('axios')
     const { GET, POST, DELETE, PATCH, expect } = cds.test(__dirname + '../../')
@@ -174,7 +174,7 @@ You have configured the access to your application. See [Add Authorization](add-
         expect(response.status).to.eql(204)
       })
     })
-    ```
+```
 
     > With this code, you have added test cases in the application.
 
