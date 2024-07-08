@@ -203,24 +203,26 @@ If you develop a business apps you may prefer using [Fiori Elements](https://exp
     ![](images/3_2_4_addbutton.png)
 
     ```XML
-       <mvc:View controllerName="sap.btp.helloworldui5.controller.View1"
-           xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-           xmlns="sap.m">
-           <Page id="page" title="{i18n>title}">
-               <content>
-                   <FlexBox direction="Row" alignItems="Center" class="sapUiTinyMarginBottom" id="Flexbox0" >
-                       <Text text="Accept the button" class="sapUiTinyMarginEnd" id="Text0"/>
-                       <Button xmlns="sap.m" text="Click the Button" id="Button0" press=".onPress"/>
-                   </FlexBox>
-               </content>
-           </Page>
-       </mvc:View>
+    <mvc:View controllerName="sap.btp.helloworldui5.controller.View1"
+        xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+        xmlns="sap.m">
+        <Page id="page" title="{i18n>title}">
+            <content>
+                <FlexBox direction="Row" alignItems="Center" class="sapUiTinyMarginBottom" id="Flexbox0" >
+                    <Text text="Accept the button" class="sapUiTinyMarginEnd" id="Text0"/>
+                    <Button xmlns="sap.m" text="Click the Button" id="Button0" press=".onPress"/>
+                </FlexBox>
+            </content>
+        </Page>
+    </mvc:View>
+    
     ```
 
-   For more information about the items, see:
-      - [Flexbox](https://ui5.sap.com/#/entity/sap.m.FlexBox/sample/sap.m.sample.FlexBoxBasicAlignment)
-      - [Text](https://ui5.sap.com/#/entity/sap.m.Text)
-      - [Button](https://ui5.sap.com/#/entity/sap.ui.webc.main.Button/sample/sap.ui.webc.main.sample.Button)
+    For more information about the items, see:
+
+    - [Flexbox](https://ui5.sap.com/#/entity/sap.m.FlexBox/sample/sap.m.sample.FlexBoxBasicAlignment)
+    - [Text](https://ui5.sap.com/#/entity/sap.m.Text)
+    - [Button](https://ui5.sap.com/#/entity/sap.ui.webc.main.Button/sample/sap.ui.webc.main.sample.Button)
 
 5. Optional: Preview your application.
 
@@ -230,24 +232,23 @@ If you develop a business apps you may prefer using [Fiori Elements](https://exp
 
    ![](images/3_2_5_addeventhandler.png)
 
-   ```Javascript
-       sap.ui.define([
-           "sap/ui/core/mvc/Controller",
-           "sap/m/MessageBox"
-       ],
-           /** @param {typeof sap.ui.core.mvc.Controller} Controller */
-           function (Controller, MessageBox) {
-               "use strict";
-   
-               return Controller.extend("sap.btp.helloworldui5.controller.View1", {
-                   onInit: function () {
-                   },
-                   onPress: function () {
-                       MessageBox.alert("You have been alerted!");
-                   }
-               });
-           });
-   ```
+    ```Javascript
+    sap.ui.define([
+        "sap/ui/core/mvc/Controller",
+        "sap/m/MessageBox"
+    ],
+        /** @param {typeof sap.ui.core.mvc.Controller} Controller */
+        function (Controller, MessageBox) {
+            "use strict";
+            return Controller.extend("sap.btp.helloworldui5.controller.View1", {
+                onInit: function () {
+                },
+                onPress: function () {
+                    MessageBox.alert("You have been alerted!");
+                }
+            });
+        });
+    ```
 
 5. Preview your application and click the button.
 
