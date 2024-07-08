@@ -102,7 +102,7 @@ In the current implementation, you can open the **Incident Management** applicat
 
 Let's have a look at the **launchpage.html** file and the configuration inside. In the first script you will see:
 
-```html
+```html[13-15,18]
 	<script>
 		window["sap-ushell-config"] = {
 			defaultRenderer: "fiori2",
