@@ -237,6 +237,7 @@ You have configured the access to your application. See [Add Authorization](add-
           ✓ Should open closed incident-undefined (14 ms)
           ✓ Should reopen the incident-undefined but fail (10 ms)
           ✓ Should fail to activate draft trying to reopen the incident (21 ms)
+
         Test Suites: 1 passed, 1 total
         Tests:       14 passed, 14 total
         Snapshots:   0 total
