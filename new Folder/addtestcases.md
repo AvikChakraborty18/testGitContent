@@ -1,5 +1,5 @@
-\---
-title: Add Test Cases1
+---
+title: Add Test Cases
 description: This tutorial shows you how to add basic tests cases in your application.
 keywords: cap 
 parser: v2
@@ -119,7 +119,6 @@ You have configured the access to your application. See [Add Authorization](add-
           })
           expect(status).to.equal(200)
         })
-    
         it('+ Activate the draft & check Status code as C using custom logic', async () => {
           const response = await POST(
             `/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=false)/ProcessorService.draftActivate`
@@ -135,7 +134,6 @@ You have configured the access to your application. See [Add Authorization](add-
           expect(status).to.eql(200)
           expect(status_code).to.eql('C')
         })
-    
         describe('should fail to re-open closed incident', () => {
           it(`Should Open Closed Incident-${draftId}`, async () => {
             const { status } = await POST(
@@ -153,7 +151,6 @@ You have configured the access to your application. See [Add Authorization](add-
             })
             expect(status).to.equal(200)
           })
-    
           it(' `Should fail to activate draft trying to re-open the incidentt', async () => {
             try {
               const response = await POST(
