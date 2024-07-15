@@ -43,7 +43,6 @@ In the current implementation, you can open the **Incident Management** applicat
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
             <script>
                 window['sap-ushell-config'] = {
                     defaultRenderer: 'fiori2',
@@ -103,7 +102,7 @@ In the current implementation, you can open the **Incident Management** applicat
 
 Let's have a look at the **launchpage.html** file and the configuration inside. In the first script you will see:
 
-```html[13-15, 18]
+```html[13-15,18]
 	<script>
 		window["sap-ushell-config"] = {
 			defaultRenderer: "fiori2",
