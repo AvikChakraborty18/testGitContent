@@ -202,7 +202,7 @@ If you develop a business apps you may prefer using [Fiori Elements](https://exp
 
     ![](images/3_2_4_addbutton.png)
 
-    ```XML 
+    ```XML
     <mvc:View controllerName="sap.btp.helloworldui5.controller.View1"
         xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
         xmlns="sap.m">
@@ -232,7 +232,7 @@ If you develop a business apps you may prefer using [Fiori Elements](https://exp
 
    ![](images/3_2_5_addeventhandler.png)
 
-    ```Javascript 
+    ```Javascript
     sap.ui.define([
         "sap/ui/core/mvc/Controller",
         "sap/m/MessageBox"
@@ -240,7 +240,6 @@ If you develop a business apps you may prefer using [Fiori Elements](https://exp
         /** @param {typeof sap.ui.core.mvc.Controller} Controller */
         function (Controller, MessageBox) {
             "use strict";
-
             return Controller.extend("sap.btp.helloworldui5.controller.View1", {
                 onInit: function () {
                 },
