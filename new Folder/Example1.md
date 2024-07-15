@@ -1,10 +1,10 @@
 ---
-title: Add Test Cases
-description: This tutorial shows you how to add basic tests cases in your application.
+title: Use a Local Launch Page
+description: This tutorial shows you how to add a launch page for local testing.
 keywords: cap 
 parser: v2
 auto_validation: true
-time: 30
+time: 10
 tags: [ tutorial>beginner, software-product-function>sap-cloud-application-programming-model, programming-tool>node-js, software-product>sap-business-technology-platform, software-product>sap-fiori]
 primary_tag: software-product-function>sap-cloud-application-programming-model
 author_name: Svetoslav Pandeliev
@@ -13,236 +13,123 @@ author_profile: https://github.com/slavipande
 
 ## You will learn
 
-- How to add dependencies
-- How to add tests
-- How to test the application
+- How to add a launch page for local testing
+
 
 ## Prerequisites
 
-You have configured the access to your application. See [Add Authorization](add-authorization).
+You have added business logic to your application. See [Add Custom Logic](add-custom-logic).
 
-### Add dependencies
+### Overview
+
+You have already generated the **Incident Management** application and can start it in the browser from SAP Business Application Studio. However, you can also add a launch page for local testing. This page looks like a real site, but is just a local copy of the otherwise centrally managed SAP Build Work Zone, standard edition site and comes with a limited version of its functionality. There's no option to add or remove applications via configuration, user roles aren't taken into account, and end-user personalization is also not included. If you want these and other SAP Build Work Zone, standard edition functionalities included, you have to set them up for your project. Find out how to do this in [Integrate Your Application with SAP Build Work Zone, Standard Edition](integrate-with-work-zone). You stick to the launch page for this tutorial though.
+
+In the current implementation, you can open the **Incident Management** application via the `app/incidents/webapp/index.html` file and there is no launch page. If you now create a second application using the SAP Fiori application generator within your project, it will be generated in the same way, again with its own `index.html` file. Instead, you can use a launch page for all the applications. You can add a launch page by creating an HTML file that uses the built-in SAPUI5 shell in the **app** folder. 
+
+### Implement a local launch page
 
 1. In SAP Business Application Studio, go to your **IncidentManagement** dev space.
 
     > Make sure the **IncidentManagement** dev space is in status **RUNNING**.
 
-2. From the root of the **INCIDENT-MANAGEMENT** project, choose the burger menu, and then choose **Terminal** &rarr; **New Terminal**.
+2. Create a new **launchpage.html** file in the **app** folder of the **INCIDENT-MANAGEMENT** application.
 
-3. To add the required dependencies, run the following command:
+3. Copy the following content to the **launchpage.html** file:
 
-    ```bash
-    npm add -D axios chai chai-as-promised chai-subset jest
-    ```
+    ```html
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-### Add tests
-
-1. Create a folder at the root of the **INCIDENT-MANAGEMENT** project and name it **tests**.
-
-2. In the **tests** folder, create the **test.js** file.
-
-3. Add the following code to the **test.js** file:
-
-    ```js
-    const cds = require('@sap/cds/lib')
-    const { default: axios } = require('axios')
-    const { GET, POST, DELETE, PATCH, expect } = cds.test(__dirname + '../../')
-
-    axios.defaults.auth = { username: 'incident.support@tester.sap.com', password: 'initial' }
-
-    jest.setTimeout(11111)
-
-    describe('Test The GET Endpoints', () => {
-      it('Should check Processor Service', async () => {
-        const processorService = await cds.connect.to('ProcessorService')
-        const { Incidents } = processorService.entities
-        expect(await SELECT.from(Incidents)).to.have.length(4)
-      })
-
-      it('Should check Customers', async () => {
-        const processorService = await cds.connect.to('ProcessorService')
-        const { Customers } = processorService.entities
-        expect(await SELECT.from(Customers)).to.have.length(3)
-      })
-
-      it('Test Expand Entity Endpoint', async () => {
-        const { data } = await GET`/odata/v4/processor/Customers?$select=firstName&$expand=incidents`
-        expect(data).to.be.an('object')
-      })
-    })
-
-    describe('Draft Choreography APIs', () => {
-      let draftId, incidentId
-
-      it('Create an incident ', async () => {
-        const { status, statusText, data } = await POST(`/odata/v4/processor/Incidents`, {
-          title: 'Urgent attention required !',
-          status_code: 'N'
-        })
-        draftId = data.ID
-        expect(status).to.equal(201)
-        expect(statusText).to.equal('Created')
-      })
-
-      it('+ Activate the draft & check Urgency code as H using custom logic', async () => {
-        const response = await POST(
-          `/odata/v4/processor/Incidents(ID=${draftId},IsActiveEntity=false)/ProcessorService.draftActivate`
-        )
-        expect(response.status).to.eql(201)
-        expect(response.data.urgency_code).to.eql('H')
-      })
-
-      it('+ Test the incident status', async () => {
-        const {
-          status,
-          data: { status_code, ID }
-        } = await GET(`/odata/v4/processor/Incidents(ID=${draftId},IsActiveEntity=true)`)
-        incidentId = ID
-        expect(status).to.eql(200)
-        expect(status_code).to.eql('N')
-      })
-
-      describe('Close Incident and Open it again to check Custom logic', () => {
-        it('Should Close the Incident-${draftId}', async () => {
-          const { status } = await POST(
-            `/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=true)/ProcessorService.draftEdit`,
-            {
-              PreserveChanges: true
+            <script>
+                window['sap-ushell-config'] = {
+                    defaultRenderer: 'fiori2',
+                    services: {
+                        NavTargetResolution: {
+                            config: {
+                                allowTestUrlComponentConfig: true,
+                                enableClientSideTargetResolution: true
+                            }
+                        }           
+                    },
+                    applications: {
+                        "incidents-app": {
+                            title: 'Incident-Management',
+                            description: 'Incidents',
+                            additionalInformation: 'SAPUI5.Component=ns.incidents',
+                            applicationType: 'URL',
+                            url: "./incidents/webapp",
+                            navigationMode: 'embedded'
+                        }
+                }
             }
-          )
-          expect(status).to.equal(201)
-        })
-
-        it('Should Close the Incident-${draftId}', async () => {
-          const { status } = await PATCH(`/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=false)`, {
-            status_code: 'C'
-          })
-          expect(status).to.equal(200)
-        })
-        it('+ Activate the draft & check Status code as C using custom logic', async () => {
-          const response = await POST(
-            `/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=false)/ProcessorService.draftActivate`
-          )
-          expect(response.status).to.eql(200)
-        })
-
-        it('+ Test the incident status to be closed', async () => {
-          const {
-            status,
-            data: { status_code }
-          } = await GET(`/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=true)`)
-          expect(status).to.eql(200)
-          expect(status_code).to.eql('C')
-        })
-        describe('should fail to re-open closed incident', () => {
-          it(`Should Open Closed Incident-${draftId}`, async () => {
-            const { status } = await POST(
-              `/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=true)/ProcessorService.draftEdit`,
-              {
-                PreserveChanges: true
-              }
-            )
-            expect(status).to.equal(201)
-          })
-
-          it(`Should re-open the Incident-${draftId} but fail`, async () => {
-            const { status } = await PATCH(`/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=false)`, {
-              status_code: 'N'
-            })
-            expect(status).to.equal(200)
-          })
-          it(' `Should fail to activate draft trying to re-open the incidentt', async () => {
-            try {
-              const response = await POST(
-                `/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=false)/ProcessorService.draftActivate`
-              )
-            } catch (error) {
-              expect(error.response.status).to.eql(500)
-              expect(error.response.data.error.message).to.include(`Can't modify a closed incident`)
-            }
-          })
-        })
-      })
-
-      it('- Delete the Draft', async () => {
-        const response = await DELETE(`/odata/v4/processor/Incidents(ID=${draftId},IsActiveEntity=false)`)
-        expect(response.status).to.eql(204)
-      })
-
-      it('- Delete the Incident', async () => {
-        const response = await DELETE(`/odata/v4/processor/Incidents(ID=${draftId},IsActiveEntity=true)`)
-        expect(response.status).to.eql(204)
-      })
-    })
+            </script>
+            <script src="https://ui5.sap.com/test-resources/sap/ushell/bootstrap/sandbox.js"></script>
+            <script
+                src="https://ui5.sap.com/resources/sap-ui-core.js"
+                data-sap-ui-libs="sap.m, sap.ushell, sap.fe.templates"
+                data-sap-ui-compatVersion="edge"
+                data-sap-ui-theme="sap_horizon"
+                data-sap-ui-frameOptions="allow"
+                data-sap-ui-bindingSyntax="complex"
+            ></script>
+            <script>
+                sap.ui.getCore().attachInit(function() {
+                    sap.ushell.Container.createRenderer().placeAt('content');
+                });
+            </script>
+        </head>
+        <body class="sapUiBody" id="content"></body>
+    </html>
     ```
 
-    > With this code, you have added test cases in the application.
+3. Make sure the SAP Fiori application is running. If you closed it, choose the **Preview Application** option in the **Application Info - incidents** tab and select the **watch-incidents** npm script.
 
-### Test the application
+    > To open the **Application Info - incidents** tab: 
+    >
+    >1. Invoke the Command Palette - **View** &rarr; **Command Palette** or <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> for macOS / <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> for Windows. 
+    >2. Choose **Fiori: Open Application Info**.
 
-1. Open the **package.json** file and add the `"test": "jest tests/test.js"` line inside the **scripts** section. This adds a command to start the tests.
+3. Go to the tab of the opened SAP Fiori application in your browser and replace **/incidents/webapp/index.html?sap-ui-xx-viewCache=false** with **/launchpage.html#Shell-home** in the URL.
 
-    ```json[15]
-    {
-      "name": "incident-management",
-      "version": "1.0.0",
-      "description": "A simple CAP project.",
-      "repository": "<Add your repository here>",
-      "license": "UNLICENSED",
-      "private": true,
-      "dependencies": {
-          ...
-      },
-      "devDependencies": {
-          ...
-      },
-      "scripts": {
-          "test": "jest tests/test.js",
-          "start": "cds-serve",
-          "watch-incidents": "cds watch --open incidents/webapp/index.html?sap-ui-xx-viewCache=false"
-      },
-      "cds": {
-          ...
-        }
-      },
-      ...
-    }
-    ```
+    > You now see a tile of the **Incident Management** application on the launch page.
 
-2. To test the application, run the following command in the terminal:
+	<!-- border; size:540px --> ![Launch Page](./launchpage.png)
 
-    ```bash
-    npm run test
-    ```
+### Check the launchpage.html file
 
-3. When all the test cases pass, the output should look like this:
+Let's have a look at the **launchpage.html** file and the configuration inside. In the first script you will see:
 
-    ```bash
-    PASS  tests/test.js
-    Test The GET Endpoints
-      ✓ Should check Processor Service (8 ms)
-      ✓ Should check Customers (2 ms)
-      ✓ Test Expand Entity Endpoint (55 ms)
-    Draft Choreography APIs
-      ✓ Create an incident  (31 ms)
-      ✓ + Activate the draft & check Urgency code as H using custom logic (28 ms)
-      ✓ + Test the incident status (16 ms)
-      ✓ - Delete the incident (12 ms)
-      Close incident and open it again to check Custom logic
-        ✓ Should Close the incident-undefined (16 ms)
-        ✓ Should Close the incident-undefined (13 ms)
-        ✓ + Activate the draft & check Status code as C using custom logic (18 ms)
-        ✓ + Test the incident status to be closed (9 ms)
-        should fail to reopen closed incident
-          ✓ Should open closed incident-undefined (14 ms)
-          ✓ Should reopen the incident-undefined but fail (10 ms)
-          ✓ Should fail to activate draft trying to reopen the incident (21 ms)
+```html[13-15, 18]
+	<script>
+		window["sap-ushell-config"] = {
+			defaultRenderer: "fiori2",
+			services: {
+                NavTargetResolution: {
+                    config: {
+                        allowTestUrlComponentConfig: true,
+                        enableClientSideTargetResolution: true
+                    }
+                }    
+            },
+            applications: {
+				"incidents-app": {
+					title: "Incidents",
+					description: "Incidents",
+					additionalInformation: "SAPUI5.Component=ns.incidents",
+					applicationType: "URL",
+					url: "./incidents/webapp",
+					navigationMode: "embedded"
+				}
+			}
+		};
+	</script>
+```
 
-        Test Suites: 1 passed, 1 total
-        Tests:       14 passed, 14 total
-        Snapshots:   0 total
-        Time:        2.028 s, estimated 7 s
-        Ran all test suites.
-    ```
-   
-    > For a more detailed guide, see [Testing](https://cap.cloud.sap/docs/node.js/cds-test) in the CAP Node.js SDK documentation.
+There is a single application in the launch page with URL that points to it. There are other properties configured here like the title and description. Similarly, another application can be added to the launch page by adding an entry in this file.
+
+> Why is the file named **launchpage.html** instead of **index.html**? 
+    You are using the name **launchpage.html** because the CAP server by default looks for an **index.html** file in the **app** folder. If the CAP server finds such a file, it replaces the default page that also contains the links to the services with the **index.html** in the folder. While this makes sense in many cases, for development purposes we'd recommend keeping the default page generated by CDS and using a different name for the index file of the launch page.
