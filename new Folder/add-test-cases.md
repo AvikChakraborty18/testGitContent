@@ -112,7 +112,6 @@ You have configured the access to your application. See [Add Authorization](add-
           )
           expect(status).to.equal(201)
         })
-
         it(`Should Close the Incident-${draftId}`, async () => {
           const { status } = await PATCH(`/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=false)`, {
             status_code: 'C'
@@ -125,7 +124,6 @@ You have configured the access to your application. See [Add Authorization](add-
           )
           expect(response.status).to.eql(200)
         })
-
         it('+ Test the incident status to be closed', async () => {
           const {
             status,
@@ -144,7 +142,6 @@ You have configured the access to your application. See [Add Authorization](add-
             )
             expect(status).to.equal(201)
           })
-
           it(`Should re-open the Incident-${draftId} but fail`, async () => {
             const { status } = await PATCH(`/odata/v4/processor/Incidents(ID=${incidentId},IsActiveEntity=false)`, {
               status_code: 'N'
