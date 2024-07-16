@@ -1,4 +1,4 @@
-
+[
 # Create a SAPUI5/SAP Fiori Freestyle app
 
 This tutorial uses the basic template to create a SAPUI5 app. The basic template is intended for all developers who want to start developing their own SAPUI5 app from scratch. 
@@ -257,3 +257,4 @@ If you develop a business apps you may prefer using [Fiori Elements](https://exp
 
 Feel free to continue your work using [SAPUI5 Demo Kit](https://ui5.sap.com/#/).
  
+](https://raw.githubusercontent.com/sap-tutorials/btp-dev-guidance/main/tutorials/use-local-launch-page/use-local-launch-page.md)
