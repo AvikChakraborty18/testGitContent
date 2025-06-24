@@ -5,7 +5,7 @@ keywords: cap
 parser: v2
 auto_validation: true
 time: 10
-tags: [ tutorial>beginner, software-product-function>sap-cloud-application-programming-model, programming-tool>node-js, software-product>sap-business-technology-platform, software-product>sap-fiori]
+tags: [ tutorial>beginner, software-product-function>sap-cloud-application-programming-model, programming-tool>node-js, programming-tool>java, software-product>sap-business-technology-platform, software-product>sap-fiori]
 primary_tag: software-product-function>sap-cloud-application-programming-model
 author_name: Svetoslav Pandeliev
 author_profile: https://github.com/slavipande
@@ -18,7 +18,9 @@ author_profile: https://github.com/slavipande
 
 ## Prerequisites
 
-You have added business logic to your application. See [Add Custom Logic](add-custom-logic).
+You have added business logic to your application. Follow the steps in the [Add Custom Logic](add-custom-logic) tutorial that is part of the [Develop a Full-Stack CAP Application Following SAP BTP Developer’s Guide](https://developers.sap.com/group.cap-application-full-stack.html) tutorial group.
+
+> This tutorial follows the guidance provided in the [SAP BTP Developer's Guide](https://help.sap.com/docs/btp/btp-developers-guide/what-is-btp-developers-guide).
 
 ### Overview
 
@@ -43,6 +45,7 @@ In the current implementation, you can open the **Incident Management** applicat
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
             <script>
                 window['sap-ushell-config'] = {
                     defaultRenderer: 'fiori2',
@@ -85,12 +88,7 @@ In the current implementation, you can open the **Incident Management** applicat
     </html>
     ```
 
-3. Make sure the SAP Fiori application is running. If you closed it, choose the **Preview Application** option in the **Application Info - incidents** tab and select the **watch-incidents** npm script.
-
-    > To open the **Application Info - incidents** tab: 
-    >
-    >1. Invoke the Command Palette - **View** &rarr; **Command Palette** or <kbd>Command</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> for macOS / <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> for Windows. 
-    >2. Choose **Fiori: Open Application Info**.
+3. Make sure the SAP Fiori application is running.
 
 3. Go to the tab of the opened SAP Fiori application in your browser and replace **/incidents/webapp/index.html?sap-ui-xx-viewCache=false** with **/launchpage.html#Shell-home** in the URL.
 
@@ -102,7 +100,7 @@ In the current implementation, you can open the **Incident Management** applicat
 
 Let's have a look at the **launchpage.html** file and the configuration inside. In the first script you will see:
 
-```html[13-15,18]
+```html
 	<script>
 		window["sap-ushell-config"] = {
 			defaultRenderer: "fiori2",
