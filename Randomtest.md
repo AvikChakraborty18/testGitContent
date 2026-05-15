@@ -971,7 +971,7 @@ After generation, you can perform the following adjustments and configurations:
 2. In all **generated CDS views** - `ZLYMGT_I_TIERCOD` , `ZLYMGT_I_TIERCONFIG_S` , ` set the annotation:  
    ```abap
    @AccessControl.authorizationCheck: #NOT_ALLOWED
-  ```
+  
 
 ### Use the Custom Business Configurations App  
 
