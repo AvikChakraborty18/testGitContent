@@ -18,7 +18,7 @@
 
 **5.  Test img tag with 'https' absolute path**
 
-<img src="https://www.valcre.in/wp-content/uploads/2022/06/sap-erp-modules.jpg" width="500px" height="400px">
+<img src="https://raw.githubusercontent.com/AvikChakraborty18/testGitContent/refs/heads/main/test/img/SystemAccount.png" width="500px" height="400px">
 
 **6.  Test img tag enclosed within [] (a href tag) - On clicking image, the image in github should open**
 
